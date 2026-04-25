@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0055)file:///C:/Users/ayoub/Downloads/portfolio_ayoub_7.html -->
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ayoub Benali – Portfolio Cybersécurité</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="./index_files/css2" rel="stylesheet">
 <style>
   :root {
     --bg: #f0f4f8;
@@ -149,7 +149,66 @@
   .project-card.advanced .project-why { border-left-color: var(--accent); }
   .project-card.advanced .project-why strong { color: var(--accent); }
 
-  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+  .btn-demo {
+    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 1px;
+    padding: 0.3rem 0.75rem; background: var(--accent); color: #fff;
+    border: none; cursor: pointer; margin-left: auto;
+    transition: background 0.2s;
+  }
+  .btn-demo:hover { background: var(--accent2); }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 500;
+    background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center; padding: 2rem;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: #f0f4f8; border: 1px solid var(--border);
+    width: 100%; max-width: 380px; border-radius: 12px;
+    overflow: hidden; box-shadow: 0 24px 60px rgba(26,115,232,0.2);
+    animation: modalIn 0.3s ease;
+  }
+  @keyframes modalIn { from { opacity:0; transform: scale(0.92) translateY(20px); } to { opacity:1; transform: none; } }
+  .modal-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 1.5rem; background: #fff; border-bottom: 1px solid var(--border);
+  }
+  .modal-title { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 2px; color: var(--accent); }
+  .modal-close { font-family: var(--mono); font-size: 1.2rem; background: none; border: none; cursor: pointer; color: var(--muted); }
+  .modal-close:hover { color: var(--accent); }
+  .modal-body { padding: 1.25rem; }
+
+  /* CALCULATRICE */
+  .calc-screen { background: #1a1a2e; border-radius: 8px; padding: 1rem 1.25rem 0.75rem; text-align: right; margin-bottom: 0.75rem; }
+  .calc-history { font-family: var(--mono); font-size: 0.72rem; color: #5f6388; min-height: 1rem; margin-bottom: 0.25rem; }
+  .calc-display { font-family: var(--mono); font-size: 2rem; font-weight: 700; color: #fff; word-break: break-all; }
+  .calc-display.small { font-size: 1.4rem; }
+  .calc-buttons { display: grid; grid-template-columns: repeat(4,1fr); gap: 5px; }
+  .cbtn { padding: 0.85rem 0.4rem; font-family: var(--mono); font-size: 0.88rem; font-weight: 700; border: none; cursor: pointer; border-radius: 6px; background: #fff; color: #1a1a2e; transition: background 0.15s, transform 0.1s; }
+  .cbtn:hover { background: #e8f0fe; }
+  .cbtn:active { transform: scale(0.93); }
+  .cbtn-op { color: #1a73e8; }
+  .cbtn-action { background: #f0f4f8; color: #5f6368; font-size: 0.75rem; }
+  .cbtn-eq { background: #1a73e8; color: #fff; }
+  .cbtn-eq:hover { background: #1557b0; }
+  .cbtn-zero { grid-column: span 2; text-align: left; padding-left: 1rem; }
+  .cbtn-clear { color: #e53935; }
+
+  /* TESTEUR MOT DE PASSE */
+  .pwd-input { width: 100%; padding: 0.9rem 1rem; font-family: var(--mono); font-size: 0.88rem; border: 1px solid var(--border); background: #fff; color: var(--text); border-radius: 6px; margin-bottom: 1rem; outline: none; }
+  .pwd-input:focus { border-color: var(--accent); }
+  .pwd-score-bar { height: 6px; background: #e8f0fe; border-radius: 3px; margin-bottom: 0.75rem; overflow: hidden; }
+  .pwd-score-fill { height: 100%; border-radius: 3px; transition: width 0.4s, background 0.4s; width: 0%; background: #e53935; }
+  .pwd-label { font-family: var(--mono); font-size: 0.8rem; font-weight: 700; margin-bottom: 1rem; }
+  .pwd-criteria { display: flex; flex-direction: column; gap: 0.4rem; }
+  .pwd-crit { display: flex; align-items: center; gap: 0.6rem; font-family: var(--mono); font-size: 0.72rem; color: var(--muted); }
+  .pwd-crit-icon { width: 16px; height: 16px; border-radius: 50%; background: #e8f0fe; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; flex-shrink: 0; }
+  .pwd-crit.ok .pwd-crit-icon { background: #00c97a; color: #fff; }
+  .pwd-crit.ok { color: var(--text); }
+
   .tag {
     font-family: var(--mono); font-size: 0.68rem; letter-spacing: 1px;
     padding: 0.25rem 0.6rem; border: 1px solid var(--border); color: var(--muted);
@@ -215,21 +274,21 @@
 <nav>
   <div class="nav-logo">AB_PORTFOLIO</div>
   <ul class="nav-links">
-    <li><a href="#about">À propos</a></li>
-    <li><a href="#projects">Projets</a></li>
-    <li><a href="#parcours">Parcours</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="file:///C:/Users/ayoub/Downloads/portfolio_ayoub_7.html#about">À propos</a></li>
+    <li><a href="file:///C:/Users/ayoub/Downloads/portfolio_ayoub_7.html#projects">Projets</a></li>
+    <li><a href="file:///C:/Users/ayoub/Downloads/portfolio_ayoub_7.html#parcours">Parcours</a></li>
+    <li><a href="file:///C:/Users/ayoub/Downloads/portfolio_ayoub_7.html#contact">Contact</a></li>
   </ul>
 </nav>
 
 <main>
   <section class="hero">
-    <div class="hero-tag">CYBERSÉCURITÉ & SUPPORT IT</div>
+    <div class="hero-tag">CYBERSÉCURITÉ &amp; SUPPORT IT</div>
     <h1>Ayoub<br><span>Benali</span></h1>
     <p class="hero-sub">Étudiant BTS SIO en reconversion, passionné par la cybersécurité et les réseaux. Je construis mes compétences projet par projet.</p>
     <div class="hero-ctas">
-      <a href="#projects" class="btn-primary">VOIR MES PROJETS</a>
-      <a href="#contact" class="btn-secondary">ME CONTACTER</a>
+      <a href="file:///C:/Users/ayoub/Downloads/portfolio_ayoub_7.html#projects" class="btn-primary">VOIR MES PROJETS</a>
+      <a href="file:///C:/Users/ayoub/Downloads/portfolio_ayoub_7.html#contact" class="btn-secondary">ME CONTACTER</a>
     </div>
     <div class="hero-grid">
       <div class="hero-stat"><div class="hero-stat-num">BTS</div><div class="hero-stat-label">SIO OPTION SISR</div></div>
@@ -250,7 +309,7 @@
       </div>
       <div class="skills-grid">
         <div class="skill-item">
-          <div class="skill-header"><span class="skill-name">RÉSEAUX & INFRASTRUCTURE</span><span class="skill-pct">60%</span></div>
+          <div class="skill-header"><span class="skill-name">RÉSEAUX &amp; INFRASTRUCTURE</span><span class="skill-pct">60%</span></div>
           <div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div>
         </div>
         <div class="skill-item">
@@ -306,7 +365,7 @@
           <div class="project-title">Calculatrice Web</div>
           <div class="project-desc">Calculatrice fonctionnelle développée en HTML/CSS/JS. Opérations de base, gestion des erreurs (division par zéro), interface claire.</div>
           <div class="project-why"><strong>CE QUE J'AI APPRIS —</strong> Logique conditionnelle en JavaScript, gestion des événements clavier et souris, manipulation du DOM.</div>
-          <div class="project-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JAVASCRIPT</span><span class="tag">DOM</span></div>
+          <div class="project-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JAVASCRIPT</span><span class="tag">DOM</span><button class="btn-demo" onclick="openModal(&#39;calc&#39;)">▶ DÉMO</button></div>
         </div>
 
         <div class="project-card">
@@ -317,7 +376,7 @@
           <div class="project-title">Testeur de Force de Mot de Passe</div>
           <div class="project-desc">Outil web qui analyse en temps réel la solidité d'un mot de passe : longueur, majuscules, chiffres, caractères spéciaux. Affiche un score visuel.</div>
           <div class="project-why"><strong>CE QUE J'AI APPRIS —</strong> Expressions régulières, notion de politique de mots de passe, lien entre sécurité et bonnes pratiques utilisateur.</div>
-          <div class="project-tags"><span class="tag">JAVASCRIPT</span><span class="tag">REGEX</span><span class="tag">SÉCURITÉ</span></div>
+          <div class="project-tags"><span class="tag">JAVASCRIPT</span><span class="tag">REGEX</span><span class="tag">SÉCURITÉ</span><button class="btn-demo" onclick="openModal(&#39;pwd&#39;)">▶ DÉMO</button></div>
         </div>
 
         <div class="project-card">
@@ -328,7 +387,7 @@
           <div class="project-title">Documentation Réseau Domestique</div>
           <div class="project-desc">Cartographie et documentation de mon réseau Wi-Fi personnel : box, appareils connectés, adresses IP, topologie. Réalisé comme un technicien IT.</div>
           <div class="project-why"><strong>CE QUE J'AI APPRIS —</strong> Adressage IP (IPv4), masques de sous-réseau, notion de DHCP, documentation technique professionnelle.</div>
-          <div class="project-tags"><span class="tag">RÉSEAU</span><span class="tag">IP</span><span class="tag">DOCUMENTATION</span></div>
+          <div class="project-tags"><span class="tag">RÉSEAU</span><span class="tag">IP</span><span class="tag">DOCUMENTATION</span><button class="btn-demo" onclick="openModal(&#39;net&#39;)">▶ VOIR</button></div>
         </div>
 
       </div>
@@ -384,7 +443,7 @@
       <div class="timeline-item active">
         <div class="timeline-date">2026 → 2028</div>
         <div class="timeline-title">BTS SIO – option SISR (en alternance)</div>
-        <div class="timeline-sub">Paris School of Technology & Business (PSBT) – Paris 11e</div>
+        <div class="timeline-sub">Paris School of Technology &amp; Business (PSBT) – Paris 11e</div>
       </div>
       <div class="timeline-item">
         <div class="timeline-date">JUIL. – OCT. 2023</div>
@@ -427,7 +486,7 @@
         <a href="tel:0769670275" class="contact-link">
           <span class="contact-link-icon">#</span>07 69 67 02 75
         </a>
-        <a href="#" class="contact-link">
+        <a href="file:///C:/Users/ayoub/Downloads/portfolio_ayoub_7.html#" class="contact-link">
           <span class="contact-link-icon">in</span>LinkedIn – à compléter
         </a>
       </div>
@@ -439,5 +498,251 @@
   <p>© 2026 Ayoub Benali</p>
   <p>BTS SIO – PSBT Paris – Cybersécurité</p>
 </footer>
-</body>
-</html>
+
+
+<!-- MODAL DOCUMENTATION RÉSEAU -->
+<div class="modal-overlay" id="modal-net">
+  <div class="modal" style="max-width:520px">
+    <div class="modal-header">
+      <span class="modal-title">DOCUMENTATION RÉSEAU //004</span>
+      <button class="modal-close" onclick="closeModal(&#39;net&#39;)">×</button>
+    </div>
+    <div class="modal-body" style="max-height:70vh;overflow-y:auto">
+      <div style="font-family:var(--mono);font-size:0.72rem;color:var(--accent);letter-spacing:2px;margin-bottom:1rem">RAPPORT TECHNIQUE — RÉSEAU DOMESTIQUE</div>
+
+      <!-- INFOS GÉNÉRALES -->
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:1rem;margin-bottom:1rem">
+        <div style="font-family:var(--mono);font-size:0.7rem;color:var(--muted);letter-spacing:2px;margin-bottom:0.75rem">INFORMATIONS GÉNÉRALES</div>
+        <table style="width:100%;border-collapse:collapse;font-size:0.8rem">
+          <tbody><tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem 0;color:var(--muted);font-family:var(--mono);font-size:0.72rem">Type de réseau</td><td style="padding:0.4rem 0;font-weight:700">Wi-Fi domestique (WPA2)</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem 0;color:var(--muted);font-family:var(--mono);font-size:0.72rem">Box / Routeur</td><td style="padding:0.4rem 0;font-weight:700">Livebox 5 (Orange)</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem 0;color:var(--muted);font-family:var(--mono);font-size:0.72rem">Adresse réseau</td><td style="padding:0.4rem 0;font-weight:700;color:var(--accent)">192.168.1.0 / 24</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem 0;color:var(--muted);font-family:var(--mono);font-size:0.72rem">Passerelle (Gateway)</td><td style="padding:0.4rem 0;font-weight:700;color:var(--accent)">192.168.1.1</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem 0;color:var(--muted);font-family:var(--mono);font-size:0.72rem">Masque de sous-réseau</td><td style="padding:0.4rem 0;font-weight:700">255.255.255.0</td></tr>
+          <tr><td style="padding:0.4rem 0;color:var(--muted);font-family:var(--mono);font-size:0.72rem">Serveur DNS</td><td style="padding:0.4rem 0;font-weight:700">8.8.8.8 (Google) / 1.1.1.1 (Cloudflare)</td></tr>
+        </tbody></table>
+      </div>
+
+      <!-- TOPOLOGIE SVG -->
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:1rem;margin-bottom:1rem">
+        <div style="font-family:var(--mono);font-size:0.7rem;color:var(--muted);letter-spacing:2px;margin-bottom:0.75rem">TOPOLOGIE DU RÉSEAU</div>
+        <svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+          <!-- INTERNET -->
+          <ellipse cx="230" cy="25" rx="40" ry="16" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1.5"></ellipse>
+          <text x="230" y="30" text-anchor="middle" font-size="9" font-family="monospace" fill="#1a73e8" font-weight="bold">INTERNET</text>
+          <!-- Ligne internet -> box -->
+          <line x1="230" y1="41" x2="230" y2="65" stroke="#1a73e8" stroke-width="1.5" stroke-dasharray="4,2"></line>
+          <!-- BOX -->
+          <rect x="185" y="65" width="90" height="32" rx="6" fill="#1a73e8" stroke="#1557b0" stroke-width="1.5"></rect>
+          <text x="230" y="85" text-anchor="middle" font-size="9" font-family="monospace" fill="#fff" font-weight="bold">LIVEBOX 5</text>
+          <text x="230" y="95" text-anchor="middle" font-size="7" font-family="monospace" fill="#d2e3fc">192.168.1.1</text>
+          <!-- Lignes box -> appareils -->
+          <line x1="200" y1="97" x2="60" y2="135" stroke="#1a73e8" stroke-width="1.2"></line>
+          <line x1="215" y1="97" x2="140" y2="135" stroke="#1a73e8" stroke-width="1.2"></line>
+          <line x1="230" y1="97" x2="230" y2="135" stroke="#1a73e8" stroke-width="1.2"></line>
+          <line x1="245" y1="97" x2="320" y2="135" stroke="#1a73e8" stroke-width="1.2"></line>
+          <line x1="260" y1="97" x2="400" y2="135" stroke="#1a73e8" stroke-width="1.2"></line>
+          <!-- APPAREILS -->
+          <!-- PC -->
+          <rect x="20" y="135" width="80" height="40" rx="5" fill="#f0f4f8" stroke="#1a73e8" stroke-width="1.2"></rect>
+          <text x="60" y="151" text-anchor="middle" font-size="8" font-family="monospace" fill="#1a73e8" font-weight="bold">💻 PC</text>
+          <text x="60" y="163" text-anchor="middle" font-size="7" font-family="monospace" fill="#5f6368">192.168.1.10</text>
+          <text x="60" y="173" text-anchor="middle" font-size="6" font-family="monospace" fill="#aaa">Câble RJ45</text>
+          <!-- LAPTOP -->
+          <rect x="100" y="135" width="80" height="40" rx="5" fill="#f0f4f8" stroke="#1a73e8" stroke-width="1.2"></rect>
+          <text x="140" y="151" text-anchor="middle" font-size="8" font-family="monospace" fill="#1a73e8" font-weight="bold">🖥 LAPTOP</text>
+          <text x="140" y="163" text-anchor="middle" font-size="7" font-family="monospace" fill="#5f6368">192.168.1.11</text>
+          <text x="140" y="173" text-anchor="middle" font-size="6" font-family="monospace" fill="#aaa">Wi-Fi</text>
+          <!-- SMARTPHONE -->
+          <rect x="190" y="135" width="80" height="40" rx="5" fill="#f0f4f8" stroke="#1a73e8" stroke-width="1.2"></rect>
+          <text x="230" y="151" text-anchor="middle" font-size="8" font-family="monospace" fill="#1a73e8" font-weight="bold">📱 PHONE</text>
+          <text x="230" y="163" text-anchor="middle" font-size="7" font-family="monospace" fill="#5f6368">192.168.1.20</text>
+          <text x="230" y="173" text-anchor="middle" font-size="6" font-family="monospace" fill="#aaa">Wi-Fi</text>
+          <!-- TV -->
+          <rect x="280" y="135" width="80" height="40" rx="5" fill="#f0f4f8" stroke="#1a73e8" stroke-width="1.2"></rect>
+          <text x="320" y="151" text-anchor="middle" font-size="8" font-family="monospace" fill="#1a73e8" font-weight="bold">📺 TV</text>
+          <text x="320" y="163" text-anchor="middle" font-size="7" font-family="monospace" fill="#5f6368">192.168.1.30</text>
+          <text x="320" y="173" text-anchor="middle" font-size="6" font-family="monospace" fill="#aaa">Wi-Fi</text>
+          <!-- IMPRIMANTE -->
+          <rect x="360" y="135" width="85" height="40" rx="5" fill="#f0f4f8" stroke="#1a73e8" stroke-width="1.2"></rect>
+          <text x="402" y="151" text-anchor="middle" font-size="8" font-family="monospace" fill="#1a73e8" font-weight="bold">🖨 PRINT</text>
+          <text x="402" y="163" text-anchor="middle" font-size="7" font-family="monospace" fill="#5f6368">192.168.1.40</text>
+          <text x="402" y="173" text-anchor="middle" font-size="6" font-family="monospace" fill="#aaa">Wi-Fi</text>
+        </svg>
+      </div>
+
+      <!-- INVENTAIRE -->
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:1rem;margin-bottom:1rem">
+        <div style="font-family:var(--mono);font-size:0.7rem;color:var(--muted);letter-spacing:2px;margin-bottom:0.75rem">INVENTAIRE DES APPAREILS</div>
+        <table style="width:100%;border-collapse:collapse;font-size:0.78rem">
+          <thead>
+            <tr style="background:#e8f0fe">
+              <th style="padding:0.4rem 0.5rem;text-align:left;font-family:var(--mono);font-size:0.68rem;color:var(--accent)">APPAREIL</th>
+              <th style="padding:0.4rem 0.5rem;text-align:left;font-family:var(--mono);font-size:0.68rem;color:var(--accent)">IP</th>
+              <th style="padding:0.4rem 0.5rem;text-align:left;font-family:var(--mono);font-size:0.68rem;color:var(--accent)">CONNEXION</th>
+              <th style="padding:0.4rem 0.5rem;text-align:left;font-family:var(--mono);font-size:0.68rem;color:var(--accent)">TYPE IP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem 0.5rem">💻 PC Bureau</td><td style="padding:0.4rem 0.5rem;font-family:var(--mono);color:var(--accent)">192.168.1.10</td><td style="padding:0.4rem 0.5rem">Câble RJ45</td><td style="padding:0.4rem 0.5rem">Statique</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem 0.5rem">🖥 Laptop</td><td style="padding:0.4rem 0.5rem;font-family:var(--mono);color:var(--accent)">192.168.1.11</td><td style="padding:0.4rem 0.5rem">Wi-Fi</td><td style="padding:0.4rem 0.5rem">DHCP</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem 0.5rem">📱 Smartphone</td><td style="padding:0.4rem 0.5rem;font-family:var(--mono);color:var(--accent)">192.168.1.20</td><td style="padding:0.4rem 0.5rem">Wi-Fi</td><td style="padding:0.4rem 0.5rem">DHCP</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem 0.5rem">📺 Smart TV</td><td style="padding:0.4rem 0.5rem;font-family:var(--mono);color:var(--accent)">192.168.1.30</td><td style="padding:0.4rem 0.5rem">Wi-Fi</td><td style="padding:0.4rem 0.5rem">DHCP</td></tr>
+            <tr><td style="padding:0.4rem 0.5rem">🖨 Imprimante</td><td style="padding:0.4rem 0.5rem;font-family:var(--mono);color:var(--accent)">192.168.1.40</td><td style="padding:0.4rem 0.5rem">Wi-Fi</td><td style="padding:0.4rem 0.5rem">Statique</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- RECOMMANDATIONS SÉCURITÉ -->
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:1rem">
+        <div style="font-family:var(--mono);font-size:0.7rem;color:var(--muted);letter-spacing:2px;margin-bottom:0.75rem">RECOMMANDATIONS SÉCURITÉ</div>
+        <div style="display:flex;flex-direction:column;gap:0.5rem">
+          <div style="display:flex;gap:0.5rem;align-items:flex-start;font-size:0.8rem"><span style="color:#00c97a;font-weight:700;flex-shrink:0">✅</span> Chiffrement WPA2 activé sur le réseau Wi-Fi</div>
+          <div style="display:flex;gap:0.5rem;align-items:flex-start;font-size:0.8rem"><span style="color:#00c97a;font-weight:700;flex-shrink:0">✅</span> Mot de passe Wi-Fi complexe (12+ caractères)</div>
+          <div style="display:flex;gap:0.5rem;align-items:flex-start;font-size:0.8rem"><span style="color:#ffa726;font-weight:700;flex-shrink:0">⚠️</span> Firmware box à mettre à jour régulièrement</div>
+          <div style="display:flex;gap:0.5rem;align-items:flex-start;font-size:0.8rem"><span style="color:#ffa726;font-weight:700;flex-shrink:0">⚠️</span> Activer un réseau Wi-Fi invité séparé pour les visiteurs</div>
+          <div style="display:flex;gap:0.5rem;align-items:flex-start;font-size:0.8rem"><span style="color:#e53935;font-weight:700;flex-shrink:0">🔴</span> Désactiver le WPS (vulnérabilité connue)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CALCULATRICE -->
+<div class="modal-overlay" id="modal-calc">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">CALCULATRICE //002</span>
+      <button class="modal-close" onclick="closeModal(&#39;calc&#39;)">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="calc-screen">
+        <div class="calc-history" id="c-hist"></div>
+        <div class="calc-display" id="c-disp">0</div>
+      </div>
+      <div class="calc-buttons">
+        <button class="cbtn cbtn-action cbtn-clear" onclick="cAC()">AC</button>
+        <button class="cbtn cbtn-action" onclick="cSign()">+/-</button>
+        <button class="cbtn cbtn-action" onclick="cPct()">%</button>
+        <button class="cbtn cbtn-op" onclick="cOp(&#39;÷&#39;)">÷</button>
+        <button class="cbtn" onclick="cNum(&#39;7&#39;)">7</button>
+        <button class="cbtn" onclick="cNum(&#39;8&#39;)">8</button>
+        <button class="cbtn" onclick="cNum(&#39;9&#39;)">9</button>
+        <button class="cbtn cbtn-op" onclick="cOp(&#39;×&#39;)">×</button>
+        <button class="cbtn" onclick="cNum(&#39;4&#39;)">4</button>
+        <button class="cbtn" onclick="cNum(&#39;5&#39;)">5</button>
+        <button class="cbtn" onclick="cNum(&#39;6&#39;)">6</button>
+        <button class="cbtn cbtn-op" onclick="cOp(&#39;−&#39;)">−</button>
+        <button class="cbtn" onclick="cNum(&#39;1&#39;)">1</button>
+        <button class="cbtn" onclick="cNum(&#39;2&#39;)">2</button>
+        <button class="cbtn" onclick="cNum(&#39;3&#39;)">3</button>
+        <button class="cbtn cbtn-op" onclick="cOp(&#39;+&#39;)">+</button>
+        <button class="cbtn cbtn-zero" onclick="cNum(&#39;0&#39;)">0</button>
+        <button class="cbtn" onclick="cDot()">.</button>
+        <button class="cbtn cbtn-eq" onclick="cCalc()">=</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL TESTEUR MOT DE PASSE -->
+<div class="modal-overlay" id="modal-pwd">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">TESTEUR MOT DE PASSE //003</span>
+      <button class="modal-close" onclick="closeModal(&#39;pwd&#39;)">×</button>
+    </div>
+    <div class="modal-body">
+      <input class="pwd-input" type="password" id="pwd-field" placeholder="Tapez un mot de passe..." oninput="checkPwd(this.value)">
+      <div class="pwd-score-bar"><div class="pwd-score-fill" id="pwd-bar"></div></div>
+      <div class="pwd-label" id="pwd-label">Entrez un mot de passe</div>
+      <div class="pwd-criteria">
+        <div class="pwd-crit" id="c-len"><div class="pwd-crit-icon">✓</div> Au moins 8 caractères</div>
+        <div class="pwd-crit" id="c-upper"><div class="pwd-crit-icon">✓</div> Une lettre majuscule</div>
+        <div class="pwd-crit" id="c-lower"><div class="pwd-crit-icon">✓</div> Une lettre minuscule</div>
+        <div class="pwd-crit" id="c-num"><div class="pwd-crit-icon">✓</div> Un chiffre</div>
+        <div class="pwd-crit" id="c-special"><div class="pwd-crit-icon">✓</div> Un caractère spécial (!@#$...)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // MODAL
+  function openModal(id) {
+    document.getElementById('modal-'+id).classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById('modal-'+id).classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('.modal-overlay').forEach(o => {
+    o.addEventListener('click', e => { if(e.target === o) o.classList.remove('active'); document.body.style.overflow=''; });
+  });
+
+  // CALCULATRICE
+  let cCur='0', cPrev='', cOper=null, cReset=false;
+  function cUpdate(v) {
+    const d = document.getElementById('c-disp');
+    d.textContent = v;
+    d.className = 'calc-display' + (v.toString().length > 9 ? ' small' : '');
+  }
+  function cNum(n) {
+    if(cReset){ cCur=''; cReset=false; }
+    if(cCur==='0' && n!=='.') cCur=n;
+    else if(cCur.length<12) cCur+=n;
+    cUpdate(cCur);
+  }
+  function cDot() {
+    if(cReset){ cCur='0'; cReset=false; }
+    if(!cCur.includes('.')) cCur+='.';
+    cUpdate(cCur);
+  }
+  function cOp(op) {
+    if(cOper && !cReset) cCalc();
+    cPrev=cCur; cOper=op; cReset=true;
+    document.getElementById('c-hist').textContent = cPrev+' '+cOper;
+  }
+  function cCalc() {
+    if(!cOper||!cPrev) return;
+    const a=parseFloat(cPrev), b=parseFloat(cCur);
+    let r;
+    document.getElementById('c-hist').textContent = cPrev+' '+cOper+' '+cCur+' =';
+    switch(cOper){
+      case '+': r=a+b; break; case '−': r=a-b; break;
+      case '×': r=a*b; break;
+      case '÷': if(b===0){cUpdate('Erreur');cOper=null;return;} r=a/b; break;
+    }
+    cCur=parseFloat(r.toFixed(10)).toString(); cOper=null; cReset=true; cUpdate(cCur);
+  }
+  function cAC(){ cCur='0';cPrev='';cOper=null;cReset=false;document.getElementById('c-hist').textContent='';cUpdate('0'); }
+  function cSign(){ cCur=(parseFloat(cCur)*-1).toString(); cUpdate(cCur); }
+  function cPct(){ cCur=(parseFloat(cCur)/100).toString(); cUpdate(cCur); }
+
+  // TESTEUR MOT DE PASSE
+  function checkPwd(v) {
+    const rules = {
+      'c-len': v.length >= 8,
+      'c-upper': /[A-Z]/.test(v),
+      'c-lower': /[a-z]/.test(v),
+      'c-num': /[0-9]/.test(v),
+      'c-special': /[^A-Za-z0-9]/.test(v)
+    };
+    let score = Object.values(rules).filter(Boolean).length;
+    Object.entries(rules).forEach(([id, ok]) => {
+      document.getElementById(id).className = 'pwd-crit' + (ok ? ' ok' : '');
+    });
+    const bar = document.getElementById('pwd-bar');
+    const label = document.getElementById('pwd-label');
+    const pcts = ['0%','20%','40%','60%','80%','100%'];
+    const colors = ['#e53935','#e53935','#ff7043','#ffa726','#66bb6a','#00c97a'];
+    const labels = ['Entrez un mot de passe','Très faible 🔴','Faible 🟠','Moyen 🟡','Fort 🟢','Très fort ✅'];
+    bar.style.width = pcts[score]; bar.style.background = colors[score];
+    label.textContent = labels[score];
+    label.style.color = colors[score];
+  }
+</script>
+
+
+</body></html>
