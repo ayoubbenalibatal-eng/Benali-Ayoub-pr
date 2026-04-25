@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayoub Benali – Portfolio Cybersécurité</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0f4f8;
+    --surface: #ffffff;
+    --surface2: #e8f0fe;
+    --accent: #1a73e8;
+    --accent2: #1557b0;
+    --text: #1a1a2e;
+    --muted: #5f6368;
+    --border: rgba(26,115,232,0.2);
+    --mono: 'Space Mono', monospace;
+    --sans: 'Syne', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {  color: var(--text); font-family: var(--sans); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: var(--mono); color: var(--accent); font-size: 0.95rem; letter-spacing: 2px; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; letter-spacing: 1px; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 4rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(26,115,232,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    font-family: var(--mono); font-size: 0.8rem; color: var(--accent);
+    letter-spacing: 3px; margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-tag::before { content: ''; display: block; width: 32px; height: 1px; background: var(--accent); }
+  h1 { font-size: clamp(3rem, 8vw, 7rem); font-weight: 800; line-height: 1; margin-bottom: 1.5rem; letter-spacing: -2px; }
+  h1 span { color: var(--accent); }
+  .hero-sub { font-size: 1.1rem; color: var(--muted); max-width: 520px; line-height: 1.8; margin-bottom: 3rem; }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 0.9rem 2rem; background: var(--accent); color: #ffffff;
+    font-family: var(--mono); font-size: 0.8rem; letter-spacing: 2px;
+    border: none; cursor: pointer; font-weight: 700;
+    text-decoration: none; display: inline-block;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,229,255,0.3); }
+  .btn-secondary {
+    padding: 0.9rem 2rem; background: transparent; color: var(--text);
+    font-family: var(--mono); font-size: 0.8rem; letter-spacing: 2px;
+    border: 1px solid var(--border); cursor: pointer;
+    text-decoration: none; display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 5rem; border: 1px solid var(--border); }
+  .hero-stat { padding: 1.5rem; border-right: 1px solid var(--border); background: var(--surface); }
+  .hero-stat:last-child { border-right: none; }
+  .hero-stat-num { font-family: var(--mono); font-size: 2rem; color: var(--accent); font-weight: 700; }
+  .hero-stat-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 1px; margin-top: 0.25rem; }
+
+  section { padding: 6rem 4rem; }
+  .section-tag {
+    font-family: var(--mono); font-size: 0.75rem; color: var(--accent);
+    letter-spacing: 3px; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
+  h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -1px; margin-bottom: 3rem; }
+
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .about-text p { color: var(--muted); line-height: 1.9; font-size: 0.95rem; margin-bottom: 1.2rem; }
+  .about-text p strong { color: var(--text); }
+  .skills-grid { display: grid; gap: 1rem; }
+  .skill-item { background: var(--surface); border: 1px solid var(--border); padding: 1rem 1.25rem; }
+  .skill-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; }
+  .skill-name { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 1px; color: var(--text); }
+  .skill-pct { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); }
+  .skill-bar { height: 2px; background: var(--surface2); }
+  .skill-fill { height: 100%; background: var(--accent); }
+
+  /* PROJETS */
+  .projects-intro { color: var(--muted); font-size: 0.95rem; line-height: 1.8; max-width: 600px; margin-bottom: 2rem; }
+  .projects-intro strong { color: var(--accent); }
+
+  .proj-category { margin-bottom: 3.5rem; }
+  .proj-category-title {
+    font-family: var(--mono); font-size: 0.72rem; color: var(--muted);
+    letter-spacing: 3px; padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border); margin-bottom: 1.5rem;
+  }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+
+  .project-card {
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 1.75rem; position: relative; overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .project-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+  .project-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 2px; background: var(--accent); transform: scaleX(0);
+    transition: transform 0.3s; transform-origin: left;
+  }
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-card.advanced { border-color: rgba(26,115,232,0.3); }
+  .project-card.advanced::before { background: var(--accent2); }
+  .project-card.advanced:hover { border-color: var(--accent); }
+
+  .project-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; }
+  .project-num { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); }
+  .project-badge {
+    font-family: var(--mono); font-size: 0.62rem; letter-spacing: 1px;
+    padding: 0.2rem 0.6rem; border: 1px solid;
+  }
+  .badge-done { border-color: var(--accent); color: var(--accent); }
+  .badge-soon { border-color: var(--muted); color: var(--muted); }
+  .badge-advanced { border-color: var(--accent); color: var(--accent); }
+
+  .project-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem; }
+  .project-desc { color: var(--muted); font-size: 0.85rem; line-height: 1.7; margin-bottom: 1rem; }
+
+  /* POURQUOI CE PROJET - bloc explicatif */
+  .project-why {
+    background: #e8f0fe; border-left: 2px solid #1a73e8;
+    padding: 0.75rem 1rem; margin-bottom: 1rem; font-size: 0.8rem;
+    color: var(--muted); line-height: 1.6;
+  }
+  .project-why strong { color: var(--accent); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 1px; }
+  .project-card.advanced .project-why { border-left-color: var(--accent); }
+  .project-card.advanced .project-why strong { color: var(--accent); }
+
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag {
+    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 1px;
+    padding: 0.25rem 0.6rem; border: 1px solid var(--border); color: var(--muted);
+  }
+
+  /* PARCOURS */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--border); }
+  .timeline-item { position: relative; padding-bottom: 2.5rem; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -2.3rem; top: 0.3rem;
+    width: 10px; height: 10px; border: 1px solid var(--accent);
+     transform: rotate(45deg);
+  }
+  .timeline-item.active::before { background: var(--accent); }
+  .timeline-date { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); margin-bottom: 0.4rem; }
+  .timeline-title { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .timeline-sub { font-size: 0.85rem; color: var(--muted); }
+
+  /* CONTACT */
+  .contact-inner { background: var(--surface); border: 1px solid var(--border); padding: 3rem; max-width: 640px; }
+  .contact-inner p { color: var(--muted); line-height: 1.8; margin-bottom: 2rem; font-size: 0.95rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem;
+    font-family: var(--mono); font-size: 0.82rem; color: var(--text);
+    text-decoration: none; padding: 1rem; border: 1px solid var(--border);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+  .contact-link-icon { color: var(--accent); font-size: 1rem; width: 20px; }
+
+  footer { padding: 2rem 4rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  footer p { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); }
+
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-tag { animation: fadeInUp 0.7s ease 0.1s both; }
+  h1 { animation: fadeInUp 0.7s ease 0.2s both; }
+  .hero-sub { animation: fadeInUp 0.7s ease 0.35s both; }
+  .hero-ctas { animation: fadeInUp 0.7s ease 0.5s both; }
+  .hero-grid { animation: fadeInUp 0.7s ease 0.65s both; }
+
+  .grid-bg {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(26,115,232,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(26,115,232,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  main { position: relative; z-index: 1; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 6rem 1.5rem 3rem; }
+    section { padding: 4rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<nav>
+  <div class="nav-logo">AB_PORTFOLIO</div>
+  <ul class="nav-links">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#projects">Projets</a></li>
+    <li><a href="#parcours">Parcours</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="hero-tag">CYBERSÉCURITÉ & SUPPORT IT</div>
+    <h1>Ayoub<br><span>Benali</span></h1>
+    <p class="hero-sub">Étudiant BTS SIO en reconversion, passionné par la cybersécurité et les réseaux. Je construis mes compétences projet par projet.</p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">VOIR MES PROJETS</a>
+      <a href="#contact" class="btn-secondary">ME CONTACTER</a>
+    </div>
+    <div class="hero-grid">
+      <div class="hero-stat"><div class="hero-stat-num">BTS</div><div class="hero-stat-label">SIO OPTION SISR</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">2026</div><div class="hero-stat-label">DÉBUT ALTERNANCE</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">CISSP</div><div class="hero-stat-label">OBJECTIF CERTIFICATION</div></div>
+    </div>
+  </section>
+
+  <!-- À PROPOS -->
+  <section id="about">
+    <div class="section-tag">01 / À PROPOS</div>
+    <h2>Qui suis-je ?</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Je m'appelle <strong>Ayoub Benali</strong>, j'ai travaillé plusieurs années comme <strong>artisan taxi parisien</strong> et technicien télécom avant de décider de me reconvertir dans l'informatique.</p>
+        <p>Ce parcours atypique m'a appris l'<strong>autonomie</strong>, la <strong>rigueur</strong> et le sens du service — des qualités essentielles en cybersécurité. Aujourd'hui, je suis étudiant en <strong>BTS SIO (SISR)</strong> à la PSBT Paris et je construis mes compétences à travers des projets concrets.</p>
+        <p>Mon objectif : devenir expert en <strong>cybersécurité offensive et défensive</strong>, décrocher la certification <strong>CISSP</strong> — la référence mondiale du secteur — et évoluer vers des missions à haute responsabilité : <strong>pentesting, réponse à incidents, architecture sécurité</strong>.</p>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-item">
+          <div class="skill-header"><span class="skill-name">RÉSEAUX & INFRASTRUCTURE</span><span class="skill-pct">60%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span class="skill-name">CYBERSÉCURITÉ (EN COURS)</span><span class="skill-pct">20%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:20%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span class="skill-name">SUPPORT IT</span><span class="skill-pct">55%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:55%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span class="skill-name">HTML / CSS / JS</span><span class="skill-pct">25%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:25%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span class="skill-name">PYTHON (DÉBUTANT)</span><span class="skill-pct">10%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:10%"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETS -->
+  <section id="projects" style="background: var(--surface);">
+    <div class="section-tag">02 / PROJETS</div>
+    <h2>Mes réalisations</h2>
+
+    <p class="projects-intro">
+      Ces projets sont réalisés dans le cadre de mon <strong>apprentissage autonome</strong>. Ils sont simples et honnêtes — je maîtrise ce que j'y présente.
+    </p>
+
+    <!-- PROJETS DÉBUTANT -->
+    <div class="proj-category">
+      <div class="proj-category-title">PROJETS RÉALISÉS — NIVEAU DÉBUTANT</div>
+      <div class="projects-grid">
+
+        <div class="project-card">
+          <div class="project-top">
+            <div class="project-num">//001</div>
+            <div class="project-badge badge-done">RÉALISÉ</div>
+          </div>
+          <div class="project-title">Portfolio Web Personnel</div>
+          <div class="project-desc">Site vitrine développé en HTML, CSS et JavaScript. Design responsive, animations CSS, navigation fluide entre les sections.</div>
+          <div class="project-why"><strong>CE QUE J'AI APPRIS —</strong> Structure d'une page web, mise en forme CSS, comportement du navigateur, organisation du code.</div>
+          <div class="project-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JAVASCRIPT</span></div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-top">
+            <div class="project-num">//002</div>
+            <div class="project-badge badge-done">RÉALISÉ</div>
+          </div>
+          <div class="project-title">Calculatrice Web</div>
+          <div class="project-desc">Calculatrice fonctionnelle développée en HTML/CSS/JS. Opérations de base, gestion des erreurs (division par zéro), interface claire.</div>
+          <div class="project-why"><strong>CE QUE J'AI APPRIS —</strong> Logique conditionnelle en JavaScript, gestion des événements clavier et souris, manipulation du DOM.</div>
+          <div class="project-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JAVASCRIPT</span><span class="tag">DOM</span></div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-top">
+            <div class="project-num">//003</div>
+            <div class="project-badge badge-done">RÉALISÉ</div>
+          </div>
+          <div class="project-title">Testeur de Force de Mot de Passe</div>
+          <div class="project-desc">Outil web qui analyse en temps réel la solidité d'un mot de passe : longueur, majuscules, chiffres, caractères spéciaux. Affiche un score visuel.</div>
+          <div class="project-why"><strong>CE QUE J'AI APPRIS —</strong> Expressions régulières, notion de politique de mots de passe, lien entre sécurité et bonnes pratiques utilisateur.</div>
+          <div class="project-tags"><span class="tag">JAVASCRIPT</span><span class="tag">REGEX</span><span class="tag">SÉCURITÉ</span></div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-top">
+            <div class="project-num">//004</div>
+            <div class="project-badge badge-done">RÉALISÉ</div>
+          </div>
+          <div class="project-title">Documentation Réseau Domestique</div>
+          <div class="project-desc">Cartographie et documentation de mon réseau Wi-Fi personnel : box, appareils connectés, adresses IP, topologie. Réalisé comme un technicien IT.</div>
+          <div class="project-why"><strong>CE QUE J'AI APPRIS —</strong> Adressage IP (IPv4), masques de sous-réseau, notion de DHCP, documentation technique professionnelle.</div>
+          <div class="project-tags"><span class="tag">RÉSEAU</span><span class="tag">IP</span><span class="tag">DOCUMENTATION</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PROJETS AVANCÉS À VENIR -->
+    <div class="proj-category">
+      <div class="proj-category-title">PROJETS EN COURS — NIVEAU BTS SIO</div>
+      <div class="projects-grid">
+
+        <div class="project-card advanced">
+          <div class="project-top">
+            <div class="project-num">//005</div>
+            <div class="project-badge badge-advanced">EN COURS</div>
+          </div>
+          <div class="project-title">Audit de Sécurité Réseau</div>
+          <div class="project-desc">Simulation d'un audit sur un réseau local virtualisé. Scan des ports, identification des services exposés, rapport de recommandations.</div>
+          <div class="project-why"><strong>OUTILS —</strong> Nmap, Wireshark, VirtualBox. Rapport professionnel en sortie.</div>
+          <div class="project-tags"><span class="tag">NMAP</span><span class="tag">WIRESHARK</span><span class="tag">VIRTUALBOX</span></div>
+        </div>
+
+        <div class="project-card advanced">
+          <div class="project-top">
+            <div class="project-num">//006</div>
+            <div class="project-badge badge-advanced">EN COURS</div>
+          </div>
+          <div class="project-title">Lab Active Directory</div>
+          <div class="project-desc">Mise en place d'un environnement Active Directory en VM : création d'utilisateurs, GPO, gestion des droits et sécurisation du domaine.</div>
+          <div class="project-why"><strong>OUTILS —</strong> Windows Server, Active Directory, Group Policy Management.</div>
+          <div class="project-tags"><span class="tag">WINDOWS SERVER</span><span class="tag">ACTIVE DIRECTORY</span><span class="tag">GPO</span></div>
+        </div>
+
+        <div class="project-card advanced">
+          <div class="project-top">
+            <div class="project-num">//007</div>
+            <div class="project-badge badge-soon">À VENIR</div>
+          </div>
+          <div class="project-title">Script Python de Monitoring</div>
+          <div class="project-desc">Script d'automatisation pour surveiller la disponibilité de services réseau et envoyer des alertes automatiques en cas d'incident.</div>
+          <div class="project-why"><strong>OUTILS —</strong> Python, bibliothèques réseau, SMTP pour les alertes email.</div>
+          <div class="project-tags"><span class="tag">PYTHON</span><span class="tag">RÉSEAU</span><span class="tag">AUTOMATISATION</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PARCOURS -->
+  <section id="parcours">
+    <div class="section-tag">03 / PARCOURS</div>
+    <h2>Mon chemin</h2>
+    <div class="timeline">
+      <div class="timeline-item active">
+        <div class="timeline-date">2026 → 2028</div>
+        <div class="timeline-title">BTS SIO – option SISR (en alternance)</div>
+        <div class="timeline-sub">Paris School of Technology & Business (PSBT) – Paris 11e</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">JUIL. – OCT. 2023</div>
+        <div class="timeline-title">Technicien Support Télécom</div>
+        <div class="timeline-sub">Full Connection – sous-traitance SFR/Orange – France entière</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">DEPUIS 2023</div>
+        <div class="timeline-title">Artisan Taxi Parisien</div>
+        <div class="timeline-sub">Travailleur indépendant – Paris</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2020 – 2022</div>
+        <div class="timeline-title">Agent de Sécurité</div>
+        <div class="timeline-sub">CEJIP Sécurité – Maisons-Laffitte</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2019 – 2020</div>
+        <div class="timeline-title">Agent de Gestion des Stocks</div>
+        <div class="timeline-sub">OAT Servaire – Wissous</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2018 – 2019</div>
+        <div class="timeline-title">Baccalauréat Technologique STMG</div>
+        <div class="timeline-sub">Lycée Jean Macé – Vitry-sur-Seine</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" style="background: var(--surface);">
+    <div class="section-tag">04 / CONTACT</div>
+    <h2>Me contacter</h2>
+    <div class="contact-inner">
+      <p>Je suis à la recherche d'une alternance en cybersécurité ou support IT pour la rentrée 2026 (rythme 2 jours école / 3 jours entreprise). N'hésitez pas à me contacter !</p>
+      <div class="contact-links">
+        <a href="mailto:ayoubbenalibatal@gmail.com" class="contact-link">
+          <span class="contact-link-icon">@</span>ayoubbenalibatal@gmail.com
+        </a>
+        <a href="tel:0769670275" class="contact-link">
+          <span class="contact-link-icon">#</span>07 69 67 02 75
+        </a>
+        <a href="#" class="contact-link">
+          <span class="contact-link-icon">in</span>LinkedIn – à compléter
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2026 Ayoub Benali</p>
+  <p>BTS SIO – PSBT Paris – Cybersécurité</p>
+</footer>
+</body>
+</html>
